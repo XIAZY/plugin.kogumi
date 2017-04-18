@@ -1,7 +1,7 @@
 # Kodi Media Center language file
-# Addon Name: kogumi
+# Addon Name: Kogumi
 # Addon id: plugin.kogumi
-# Addon Provider: Zhongyang Xia
+# Addon Provider: XIAZY
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
