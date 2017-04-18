@@ -1,5 +1,5 @@
 # Overview
-A addon for KODI to stream latest Anime Bangumis
+An addon for KODI to stream latest Anime Bangumis
 # Source
 All videos come from bilibili.com
 
