@@ -3,7 +3,7 @@ A addon for KODI to stream latest Anime Bangumis
 # Source
 All videos come from bilibili.com
 
-__Special thanks from APIs provided by https://www.biliplus.com/__
+__Special thanks for APIs provided by https://www.biliplus.com/__
 # Usage
 Just clone the repository, put it to your KODI addon folder. On macOS it's in `~/Library/Application Support/Kodi/addons`. This is expected to work on multiple platforms.
 
