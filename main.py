@@ -26,14 +26,14 @@ def build_url(query):
 mode = args.get('mode', None)
 if mode is None:
     bangumi_list_page = urllib2.urlopen(bangumi_list_url).read()
-    bangumi_pattern = re.compile('bangumis=(\[.*\]);')
+    bangumi_pattern = re.compile('bangumis=(\{.*\});')
     bangumi_json_str = bangumi_pattern.findall(bangumi_list_page)[0]
     bangumi_list = json.loads(bangumi_json_str)
     li = xbmcgui.ListItem(u'手动输入 av 号'.encode('utf-8'))
     url = build_url({'mode': 'get_av_id'})
     xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
     for weekday in bangumi_list:
-        for bangumi in weekday:
+        for bangumi in bangumi_list[weekday]:
             title = bangumi['title'].encode('utf-8')
             link = bangumi['link'].encode('utf-8').replace('i/', '')
             url = build_url({'mode': 'folder', 'foldername': title, 'link': link})
@@ -77,9 +77,10 @@ elif mode[0] == 'video':
     info_url = 'https://www.biliplus.com/api/geturl?bangumi=%s&av=%s&page=%s' % (bangumi, av_id, page)
     episode_info = json.loads(urllib2.urlopen(info_url).read())['data']
     for video in episode_info:
-        if video['type'].encode('utf-8') == 'single':
-            name = video['name'].encode('utf-8')
-            video_url = video['url'].encode('utf-8')
-            li = xbmcgui.ListItem(name)
-            xbmcplugin.addDirectoryItem(handle=addon_handle, url=video_url, listitem=li)
+        if video['type'].encode('utf-8') == 'split':
+            for pats in video['parts']:
+                name = video['name'].encode('utf-8')
+                video_url = pats['url'].encode('utf-8')
+                li = xbmcgui.ListItem(name)
+                xbmcplugin.addDirectoryItem(handle=addon_handle, url=video_url, listitem=li)
     xbmcplugin.endOfDirectory(addon_handle)
